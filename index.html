@@ -145,6 +145,97 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/19/PINNs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Chen Jiahui">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChenChenChen's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/19/PINNs/" class="post-title-link" itemprop="url">PINNs</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-08-19 22:59:14 / 修改时间：22:59:38" itemprop="dateCreated datePublished" datetime="2020-08-19T22:59:14+08:00">2020-08-19</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="PINNs-Physics-Informed-Neural-Networks"><a href="#PINNs-Physics-Informed-Neural-Networks" class="headerlink" title="PINNs : Physics Informed Neural Networks"></a>PINNs : Physics Informed Neural Networks</h1><p>文章分两部分</p>
+<ol>
+<li>Data-driven solutions</li>
+<li>Data-driven discovery</li>
+</ol>
+<p>两大部分里又分别讲了连续模型和离散模型。<br>以下面的图为例，为求解Burgers方程的连续与离散解法。</p>
+<p><img src="/2020/08/19/PINNs/image-20200819165040931.png" alt="image-20200819165040931"></p>
+<p>对于连续模型来说：</p>
+<ul>
+<li>inference指，用已知的<strong>边界及边界值(边界条件)**和</strong>方程参数**，可以学习推理出内部所有的值；</li>
+<li>identification指，用已知的<strong>边界及内部值</strong>，来学习到方程的参数，如lambda1, lambda2。</li>
+</ul>
+<p>对于离散时间模型来说：</p>
+<ul>
+<li>inference指，用已知的<strong>某一时刻的数据值</strong>和<strong>方程参数</strong>，可以学习推理出下一时刻值；</li>
+<li>identification指，用已知的<strong>已经多时刻的值</strong>，来学习到方程的参数，如lambda1, lambda2。</li>
+</ul>
+<p>所以下面两个可以归类于Data-driven <strong>solutions</strong>，因为是去解方程，根据<strong>已知的边界</strong>和<strong>已知方程及参数</strong>，去得到区域内所有的值。</p>
+<p><img src="/2020/08/19/PINNs/image-20200819170806817.png" alt="image-20200819170806817"></p>
+<p><img src="/2020/08/19/PINNs/image-20200819170821279.png" alt="image-20200819170821279"></p>
+<p>那么余下的两个identification就是discovery，根据<strong>已知的大量的点值</strong>，求解<strong>得到方程参数</strong>。</p>
+<p><img src="/2020/08/19/PINNs/image-20200819170001519.png" alt="image-20200819170001519"></p>
+<p><img src="/2020/08/19/PINNs/image-20200819165950469.png" alt="image-20200819165950469"></p>
+<h1 id="Data-driven-solutions-of-partial-differential-equations"><a href="#Data-driven-solutions-of-partial-differential-equations" class="headerlink" title="Data-driven solutions of partial differential equations"></a>Data-driven solutions of partial differential equations</h1><p>就是在讲怎么解 PDEs（Partial Differential Equations）</p>
+<h2 id="continuous-time-inference-Burgers"><a href="#continuous-time-inference-Burgers" class="headerlink" title="continuous time inference (Burgers)"></a>continuous time inference (Burgers)</h2><p>用已知的<strong>边界及边界值</strong>和<strong>方程参数</strong>，可以学习推理出内部所有的值</p>
+<p><img src="/2020/08/19/PINNs/image-20200819172548987.png" alt="image-20200819172548987"></p>
+<h2 id="discrete-time-inference-Burgers"><a href="#discrete-time-inference-Burgers" class="headerlink" title="discrete time inference (Burgers)"></a>discrete time inference (Burgers)</h2><p>用已知的<strong>某一时刻的数据值</strong>和<strong>方程参数</strong>，可以学习推理出下一时刻值；</p>
+<p><img src="/2020/08/19/PINNs/image-20200819172616200.png" alt="image-20200819172616200"></p>
+<h1 id="Data-driven-discovery-of-partial-differential-equations"><a href="#Data-driven-discovery-of-partial-differential-equations" class="headerlink" title="Data-driven discovery of partial differential equations"></a>Data-driven discovery of partial differential equations</h1><p> 就是在讲怎样解PDE的反问题 (带参数的PDE，参数需要在解的过程中求解出来)</p>
+<h2 id="continuous-time-identification-Burgers"><a href="#continuous-time-identification-Burgers" class="headerlink" title="continuous time identification (Burgers)"></a>continuous time identification (Burgers)</h2><p>用已知的<strong>边界及内部值</strong>，来学习到方程的参数，如lambda1, lambda2，图的最下方为模型识别出的lambda1和lambda2，可以看出与原方程误差很小。</p>
+<p><img src="/2020/08/19/PINNs/image-20200819170924279.png" alt="image-20200819170924279"></p>
+<h2 id="discrete-time-identification-Burgers"><a href="#discrete-time-identification-Burgers" class="headerlink" title="discrete time identification (Burgers)"></a>discrete time identification (Burgers)</h2><p>用已知的<strong>已经多时刻的值</strong>，来学习到方程的参数，如lambda1, lambda2。</p>
+<p><img src="/2020/08/19/PINNs/image-20200819172648798.png" alt="image-20200819172648798"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/19/Anaconda3-tensorflow2-0%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -462,7 +553,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
