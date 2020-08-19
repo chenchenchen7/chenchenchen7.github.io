@@ -20,28 +20,80 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="ChenChenChen&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="变量创建一个Hero对象会用到new关键字，但是给一个基本类型变量赋值却不是用new. 因为基本类型是Java语言里的一种内置的特殊数据类型，并不是某个类的对象。给基本类型的变量赋值的方式叫做 字面值，如下所例： 八种变量 整型 （4种）byte、short、int、long     字符型 （1种） 16位，只能存放一个字符 char c &#x3D; &#39;中&#39;  浮点型 （2种） 注意：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java基础">
+<meta property="og:url" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="ChenChenChen&#39;s Blog">
+<meta property="og:description" content="变量创建一个Hero对象会用到new关键字，但是给一个基本类型变量赋值却不是用new. 因为基本类型是Java语言里的一种内置的特殊数据类型，并不是某个类的对象。给基本类型的变量赋值的方式叫做 字面值，如下所例： 八种变量 整型 （4种）byte、short、int、long     字符型 （1种） 16位，只能存放一个字符 char c &#x3D; &#39;中&#39;  浮点型 （2种） 注意：">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200807214534181.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200807215157797.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200807221831698.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200807222408276.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200808095011738.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200808095017930.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200808132243473.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200808155603770.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200809134830934.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200809144102059.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200810191952313.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200810214431100.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200810214709792.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200811204439616.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200811204843992.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200811210452014.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200812213731126.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200815104529255.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200815110538476.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200815143041917.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200815143425302.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200815153314500.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200815164927133.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200815165045149.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200815165645199.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200815170717439.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/2568.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/2569.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/778.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200816112552711.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/793.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/2595.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/2596.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200816143321706.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200816145619013.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/2611.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/2612.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/2617.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200808111239280.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200808111431365.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200808111631396.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200808112056486.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200808112132007.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200808112204867.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200808112235141.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200808130402732.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200808130547648.png">
+<meta property="article:published_time" content="2020-08-19T15:04:05.000Z">
+<meta property="article:modified_time" content="2020-08-19T15:04:27.032Z">
 <meta property="article:author" content="Chen Jiahui">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200807214534181.png">
 
-<link rel="canonical" href="http://yoursite.com/">
+<link rel="canonical" href="http://yoursite.com/2020/08/19/Java%E5%9F%BA%E7%A1%80/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>ChenChenChen's Blog</title>
+  <title>Java基础 | ChenChenChen's Blog</title>
   
 
 
@@ -139,9 +191,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -157,10 +210,9 @@
       <meta itemprop="name" content="ChenChenChen's Blog">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/19/Java%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">Java基础</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          Java基础
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -184,7 +236,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><p>创建一个Hero对象会用到new关键字，但是给一个基本类型变量赋值却不是用new. 因为基本类型是Java语言里的一种内置的特殊数据类型，并不是某个类的对象。<br>给基本类型的变量赋值的方式叫做 <strong>字面值</strong>，如下所例：</p>
+        <h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><p>创建一个Hero对象会用到new关键字，但是给一个基本类型变量赋值却不是用new. 因为基本类型是Java语言里的一种内置的特殊数据类型，并不是某个类的对象。<br>给基本类型的变量赋值的方式叫做 <strong>字面值</strong>，如下所例：</p>
 <h2 id="八种变量"><a href="#八种变量" class="headerlink" title="八种变量"></a>八种变量</h2><ul>
 <li><p>整型 （4种）byte、short、int、long</p>
 <p><img src="/2020/08/19/Java%E5%9F%BA%E7%A1%80/image-20200807214534181.png" alt="image-20200807214534181"></p>
@@ -910,367 +962,30 @@
 </li>
 </ol>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/19/PINNs/">
+        
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Chen Jiahui">
-      <meta itemprop="description" content="">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChenChenChen's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/19/PINNs/" class="post-title-link" itemprop="url">PINNs</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-08-19 22:59:14 / 修改时间：22:59:38" itemprop="dateCreated datePublished" datetime="2020-08-19T22:59:14+08:00">2020-08-19</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="PINNs-Physics-Informed-Neural-Networks"><a href="#PINNs-Physics-Informed-Neural-Networks" class="headerlink" title="PINNs : Physics Informed Neural Networks"></a>PINNs : Physics Informed Neural Networks</h1><p>文章分两部分</p>
-<ol>
-<li>Data-driven solutions</li>
-<li>Data-driven discovery</li>
-</ol>
-<p>两大部分里又分别讲了连续模型和离散模型。<br>以下面的图为例，为求解Burgers方程的连续与离散解法。</p>
-<p><img src="/2020/08/19/PINNs/image-20200819165040931.png" alt="image-20200819165040931"></p>
-<p>对于连续模型来说：</p>
-<ul>
-<li>inference指，用已知的<strong>边界及边界值(边界条件)**和</strong>方程参数**，可以学习推理出内部所有的值；</li>
-<li>identification指，用已知的<strong>边界及内部值</strong>，来学习到方程的参数，如lambda1, lambda2。</li>
-</ul>
-<p>对于离散时间模型来说：</p>
-<ul>
-<li>inference指，用已知的<strong>某一时刻的数据值</strong>和<strong>方程参数</strong>，可以学习推理出下一时刻值；</li>
-<li>identification指，用已知的<strong>已经多时刻的值</strong>，来学习到方程的参数，如lambda1, lambda2。</li>
-</ul>
-<p>所以下面两个可以归类于Data-driven <strong>solutions</strong>，因为是去解方程，根据<strong>已知的边界</strong>和<strong>已知方程及参数</strong>，去得到区域内所有的值。</p>
-<p><img src="/2020/08/19/PINNs/image-20200819170806817.png" alt="image-20200819170806817"></p>
-<p><img src="/2020/08/19/PINNs/image-20200819170821279.png" alt="image-20200819170821279"></p>
-<p>那么余下的两个identification就是discovery，根据<strong>已知的大量的点值</strong>，求解<strong>得到方程参数</strong>。</p>
-<p><img src="/2020/08/19/PINNs/image-20200819170001519.png" alt="image-20200819170001519"></p>
-<p><img src="/2020/08/19/PINNs/image-20200819165950469.png" alt="image-20200819165950469"></p>
-<h1 id="Data-driven-solutions-of-partial-differential-equations"><a href="#Data-driven-solutions-of-partial-differential-equations" class="headerlink" title="Data-driven solutions of partial differential equations"></a>Data-driven solutions of partial differential equations</h1><p>就是在讲怎么解 PDEs（Partial Differential Equations）</p>
-<h2 id="continuous-time-inference-Burgers"><a href="#continuous-time-inference-Burgers" class="headerlink" title="continuous time inference (Burgers)"></a>continuous time inference (Burgers)</h2><p>用已知的<strong>边界及边界值</strong>和<strong>方程参数</strong>，可以学习推理出内部所有的值</p>
-<p><img src="/2020/08/19/PINNs/image-20200819172548987.png" alt="image-20200819172548987"></p>
-<h2 id="discrete-time-inference-Burgers"><a href="#discrete-time-inference-Burgers" class="headerlink" title="discrete time inference (Burgers)"></a>discrete time inference (Burgers)</h2><p>用已知的<strong>某一时刻的数据值</strong>和<strong>方程参数</strong>，可以学习推理出下一时刻值；</p>
-<p><img src="/2020/08/19/PINNs/image-20200819172616200.png" alt="image-20200819172616200"></p>
-<h1 id="Data-driven-discovery-of-partial-differential-equations"><a href="#Data-driven-discovery-of-partial-differential-equations" class="headerlink" title="Data-driven discovery of partial differential equations"></a>Data-driven discovery of partial differential equations</h1><p> 就是在讲怎样解PDE的反问题 (带参数的PDE，参数需要在解的过程中求解出来)</p>
-<h2 id="continuous-time-identification-Burgers"><a href="#continuous-time-identification-Burgers" class="headerlink" title="continuous time identification (Burgers)"></a>continuous time identification (Burgers)</h2><p>用已知的<strong>边界及内部值</strong>，来学习到方程的参数，如lambda1, lambda2，图的最下方为模型识别出的lambda1和lambda2，可以看出与原方程误差很小。</p>
-<p><img src="/2020/08/19/PINNs/image-20200819170924279.png" alt="image-20200819170924279"></p>
-<h2 id="discrete-time-identification-Burgers"><a href="#discrete-time-identification-Burgers" class="headerlink" title="discrete time identification (Burgers)"></a>discrete time identification (Burgers)</h2><p>用已知的<strong>已经多时刻的值</strong>，来学习到方程的参数，如lambda1, lambda2。</p>
-<p><img src="/2020/08/19/PINNs/image-20200819172648798.png" alt="image-20200819172648798"></p>
-
-      
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/19/PINNs/" rel="prev" title="PINNs">
+      <i class="fa fa-chevron-left"></i> PINNs
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/19/Anaconda3-tensorflow2-0%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Chen Jiahui">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChenChenChen's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/19/Anaconda3-tensorflow2-0%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">Anaconda3+tensorflow2.0快速安装</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-08-19 22:53:19 / 修改时间：22:53:39" itemprop="dateCreated datePublished" datetime="2020-08-19T22:53:19+08:00">2020-08-19</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="1-清华源下载最新版本Anaconda3"><a href="#1-清华源下载最新版本Anaconda3" class="headerlink" title="1.清华源下载最新版本Anaconda3"></a>1.清华源下载最新版本Anaconda3</h1><p><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/?C=M&amp;O=A">https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/?C=M&amp;O=A</a></p>
-<p><img src="/2020/08/19/Anaconda3-tensorflow2-0%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85/image-20200813143622474.png" alt="image-20200813143622474"></p>
-<p>不用担心Anaconda自带的Python版本，反正最后自己要用conda管理新建一个新的环境，到时候会指定Python版本。</p>
-<p>一路next下来，记得加入环境变量。最后打开Anaconda Prompt。<strong>最好管理员身份运行</strong></p>
-<h1 id="2-创建新的环境并安装tf"><a href="#2-创建新的环境并安装tf" class="headerlink" title="2.创建新的环境并安装tf"></a>2.创建新的环境并安装tf</h1><p><code>conda create --name tf2.0.0 python=3.6</code></p>
-<p><code>tf2.0.0</code>就是新环境的名字，可以根据自己的需求更改，python选择3.6版本更稳妥，大部分tensorflow跟pytorch的版本都符合。</p>
-<p><code>conda activate tf2.0.0</code></p>
-<p>进入新环境，进行tf-gpu的安装。</p>
-<p><code>conda install TensorFlow-gpu==2.0.0</code></p>
-<p>conda会自动下载安装cuda和cudnn，所以不需要管。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda create --name tf2.0.0 python&#x3D;3.6</span><br><span class="line">conda activate tf2.0.0</span><br><span class="line">conda install TensorFlow-gpu&#x3D;&#x3D;2.0.0</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="3-测试是否安装成功"><a href="#3-测试是否安装成功" class="headerlink" title="3.测试是否安装成功"></a>3.测试是否安装成功</h1><p>在新环境下，输入python，进入python环境，输入下列代码，看到True即gpu版本tensorflow安装成功</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line">tf.test.is_gpu_available()</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/08/19/Anaconda3-tensorflow2-0%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85/image-20200813144252433.png" alt="image-20200813144252433"></p>
-<p><img src="/2020/08/19/Anaconda3-tensorflow2-0%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85/image-20200813144321289.png" alt="image-20200813144321289"></p>
-<h1 id="4-Pytorch安装"><a href="#4-Pytorch安装" class="headerlink" title="4.Pytorch安装"></a>4.Pytorch安装</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda create --name pytorch1.6.0 python&#x3D;3.6</span><br><span class="line">conda activate pytorch1.6.0</span><br><span class="line">conda install pytorch torchvision cudatoolkit&#x3D;10.2 -c pytorch</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/08/19/Anaconda3-tensorflow2-0%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85/image-20200813145457535.png" alt="image-20200813145457535"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">torch.cuda.is_available()</span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="/2020/08/19/Anaconda3-tensorflow2-0%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85/image-20200813192822074.png" alt="image-20200813192822074"></p>
-<h1 id="5-Pycharm配置"><a href="#5-Pycharm配置" class="headerlink" title="5.Pycharm配置"></a>5.Pycharm配置</h1><p>下载不多说了</p>
-<h1 id="6-jupyter-notebook配置"><a href="#6-jupyter-notebook配置" class="headerlink" title="6.jupyter notebook配置"></a>6.jupyter notebook配置</h1><p>在conda里安装了新环境，在jupyter里面是没有的，需要自己添加一下</p>
-<p>首先进入到环境里</p>
-<p><code>conda activate tf2.0.0</code></p>
-<p>然后安装ipykernel</p>
-<p><code>conda install ipykernel</code></p>
-<p>写入jupyter的kernel</p>
-<p><code>python -m ipykernel install --user --name 环境名称 --display-name &quot;Python (环境名称)&quot;</code></p>
-<p>效果：</p>
-<p><img src="/2020/08/19/Anaconda3-tensorflow2-0%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85/image-20200816165245148.png" alt="image-20200816165245148"></p>
-<p>删除kernel环境(环境名称-&gt;tf2.0.0)</p>
-<p><code>jupyter kernelspec remove 环境名称</code></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/02/Java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Chen Jiahui">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ChenChenChen's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/02/Java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" class="post-title-link" itemprop="url">Java学习路线</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-02 22:10:14" itemprop="dateCreated datePublished" datetime="2020-08-02T22:10:14+08:00">2020-08-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-03 22:45:01" itemprop="dateModified" datetime="2020-08-03T22:45:01+08:00">2020-08-03</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a>Java基础</h1><ol>
-<li>语言基础</li>
-<li>JVM</li>
-<li>并发/多线程</li>
-</ol>
-<h1 id="Java框架"><a href="#Java框架" class="headerlink" title="Java框架"></a>Java框架</h1><ol>
-<li>Spring</li>
-<li>Spring MVC</li>
-<li>Spring Boot</li>
-</ol>
-<p><strong>工具/数据库：</strong>Maven/Git/SQL/Tomcat/Redis</p>
-<h1 id="Java项目"><a href="#Java项目" class="headerlink" title="Java项目"></a>Java项目</h1><p>我是一个Java的新手，差不多学到多线程，想问下🐏哥，在GitHub下载你推荐的Java练习项目该怎么入手。</p>
-<p>———————<strong>看readme文档，所提到的技术点各个击破</strong>———————</p>
-<p>—–<strong>读好readme，或者项目自带的文档说明，基本就问题不大了，前提是基础和框架部分要熟悉鸭</strong>—–</p>
-<ol>
-<li><p>Java</p>
-<p><strong>项目简介</strong>：这是一个基于Java的数据结构与算法的实现项目。里面包含了几乎常用所有<strong>数据结构的实现</strong>，以及诸多<strong>算法题</strong>和<strong>LeetCode习题</strong>的Java实现。主要包括：</p>
-<ul>
-<li>加解密算法</li>
-<li>进制转换</li>
-<li>各种数据结构</li>
-<li>分治</li>
-<li>动态规划</li>
-<li>数学类问题</li>
-<li>搜索问题</li>
-<li>排序问题</li>
-<li>LeetCode习题</li>
-<li>其他杂项算法题等</li>
-</ul>
-<p>基于Java语言的数据结构和算法题练手必备！</p>
-<p><strong>项目源码</strong>：<a target="_blank" rel="noopener" href="https://github.com/TheAlgorithms/Java">https://github.com/TheAlgorithms/Java</a></p>
-</li>
-<li><p>eladmin</p>
-<p><strong>项目简介</strong>：eladmin是一个基于 Spring Boot + Vue的前后端分离的后台管理系统，项目采用分模块开发方式， 权限控制采用 RBAC，支持数据字典与数据权限管理，支持一键生成前后端代码，支持动态路由，对于初学者还是比较友好的。</p>
-<ul>
-<li><p>Spring Boot 2.x</p>
-</li>
-<li><p>JPA</p>
-</li>
-<li><p>Spring Security</p>
-</li>
-<li><p>Redis</p>
-</li>
-<li><p>Vue</p>
-<p>一套典型的后台管理系统，用的也是一套比较典型的Java后端开发技术，可以帮我们串联起很多后端开发的知识。</p>
-</li>
-</ul>
-<p><strong>项目源码</strong>：<a target="_blank" rel="noopener" href="https://github.com/elunez/eladmin">https://github.com/elunez/eladmin</a></p>
-</li>
-<li><p>jodd</p>
-<p><strong>项目简介</strong>：Jodd <strong>=</strong> tools <strong>+</strong> ioc <strong>+</strong> mvc <strong>+</strong> db <strong>+</strong> aop <strong>+</strong> tx <strong>+</strong> json <strong>+</strong> html <strong>&lt; 1.7 Mb</strong></p>
-<p>没错，Jodd是一个非常易用和好上手的<strong>开源Java微框架</strong>，里面包含了一系列平时经常会用到的一些<strong>核心程序库</strong>、<strong>工具类/方法</strong>、<strong>实用程序/框架</strong>等等。有了它，开发人员做起事来会变得非常简易和优雅，引入jodd就能帮我们快速实现某些功能。点赞！</p>
-<p>jodd主要包含：</p>
-<ul>
-<li>Jodd Libraries（程序库）：Json、Email、HTTP、Jerry …</li>
-<li>Micro-frameworks（微框架）：Madvoc、Petite、Proxetta、DbOom …</li>
-<li>Jodd Utilities（实用工具）：BeanUtil、Props、Decora、Cli、Ref …</li>
-</ul>
-<p>一方面当我们想要用Java快速实现一些功能需求的时候，引入jodd就可以帮我们完成很多事情，很多工具和代码都开箱即用，简便高效；另外一方面研究其源码可以帮助我们打开技术视野。</p>
-<p><strong>项目源码</strong>：<a target="_blank" rel="noopener" href="https://github.com/oblac/jodd">https://github.com/oblac/jodd</a></p>
-</li>
-<li><p>SnowJena</p>
-<p><strong>项目简介</strong>：SnowJena是一个基于令牌桶算法实现的分布式无锁<strong>限流框架</strong>，支持熔断降级，支持动态配置规则，支持可视化监控，开箱即用。可用于Java后端项目常见的本地限流和分布式限流的场景。</p>
-<p>jodd主要包含：</p>
-<ul>
-<li>支持本地限流</li>
-<li>支持分布式限流</li>
-<li>支持黑白名单</li>
-<li>支持可视化监控等。</li>
-</ul>
-<p>一是帮助我们学习和实践<strong>限流</strong>这一常见的技术方案和实现原理，二是帮助我们学习和理解常见的<strong>设计模式</strong>。</p>
-<p><strong>项目源码</strong>：<a target="_blank" rel="noopener" href="https://github.com/ystcode/SnowJena">https://github.com/ystcode/SnowJena</a></p>
-</li>
-<li><p>seata</p>
-<p><strong>项目简介</strong>：Seata 是一款阿里巴巴开源的<strong>分布式事务</strong>解决方案，致力于在微服务架构下提供高性能和简单易用的分布式事务服务。</p>
-<p>jodd主要包含：</p>
-<ul>
-<li>支持常见主流的微服务框架</li>
-<li>支持AT模式</li>
-<li>支持TCC模式</li>
-<li>支持SAGA模式</li>
-<li>高可用和强大的横向扩展能力</li>
-</ul>
-<p>分布式事务问题几乎是当下后端开发和架构领域<strong>最棘手</strong>和<strong>最有含金量</strong>的问题之一，多学点总是好的。</p>
-<p><strong>项目源码</strong>：<a target="_blank" rel="noopener" href="https://github.com/seata/seata">https://github.com/seata/seata</a></p>
-</li>
-</ol>
-<h1 id="共勉"><a href="#共勉" class="headerlink" title="共勉"></a>共勉</h1><p>感谢这些优秀的开源作者和优秀的开源项目，我们站在具人的肩膀上，看得更好，走得也更远！</p>
-<p>在没有这样总结之前，总感觉东西很乱，但经过这一番梳理和串接之后，其实我们会发现，<strong>虽然东西是不少，但好在路线也非常清晰</strong>，按照这个路线去扎实推进一般问题就不大了。</p>
-<p><strong>急不得，慢一点才能更快。</strong></p>
-<h2 id="平稳降落"><a href="#平稳降落" class="headerlink" title="平稳降落"></a>平稳降落</h2><p>飞得多快、非得多高不是目的，重点是如何平稳降落。调整心态、注意健康，徐图长期发展，共勉。</p>
-<hr>
-<p>每天进步一点点，Peace！</p>
-<p><img src="/2020/08/02/Java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/image-20200802221151638.png" alt="image-20200802221151638"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
   
 
 
@@ -1323,6 +1038,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%98%E9%87%8F"><span class="nav-number">1.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E7%A7%8D%E5%8F%98%E9%87%8F"><span class="nav-number">1.1.</span> <span class="nav-text">八种变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.2.</span> <span class="nav-text">类型转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="nav-number">1.3.</span> <span class="nav-text">命名规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">1.4.</span> <span class="nav-text">变量作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#final%E4%BF%AE%E9%A5%B0"><span class="nav-number">1.5.</span> <span class="nav-text">final修饰</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E7%BB%84"><span class="nav-number">2.</span> <span class="nav-text">数组</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Arrays%E5%B7%A5%E5%85%B7%E7%B1%BB"><span class="nav-number">2.1.</span> <span class="nav-text">Arrays工具类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#copyOfRange"><span class="nav-number">2.1.1.</span> <span class="nav-text">copyOfRange</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#toString-NaN"><span class="nav-number">2.1.2.</span> <span class="nav-text">toString</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sort"><span class="nav-number">2.1.3.</span> <span class="nav-text">sort</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#equals"><span class="nav-number">2.1.4.</span> <span class="nav-text">equals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fill"><span class="nav-number">2.1.5.</span> <span class="nav-text">fill</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.</span> <span class="nav-text">类和对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E9%87%8D%E8%BD%BD"><span class="nav-number">3.1.</span> <span class="nav-text">方法重载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">构造方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#this"><span class="nav-number">3.3.</span> <span class="nav-text">this</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="nav-number">3.4.</span> <span class="nav-text">访问修饰符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%B1%9E%E6%80%A7%E4%B8%8E%E7%B1%BB%E6%96%B9%E6%B3%95"><span class="nav-number">3.5.</span> <span class="nav-text">类属性与类方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%B1%9E%E6%80%A7"><span class="nav-number">3.5.1.</span> <span class="nav-text">类属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E6%96%B9%E6%B3%95"><span class="nav-number">3.5.2.</span> <span class="nav-text">类方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">3.6.</span> <span class="nav-text">属性初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.7.</span> <span class="nav-text">单例模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A5%BF%E6%B1%89%E5%BC%8F"><span class="nav-number">3.7.1.</span> <span class="nav-text">饿汉式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%87%92%E6%B1%89%E5%BC%8F"><span class="nav-number">3.7.2.</span> <span class="nav-text">懒汉式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95"><span class="nav-number">3.7.3.</span> <span class="nav-text">面试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.8.</span> <span class="nav-text">枚举类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E4%B8%8E%E7%BB%A7%E6%89%BF"><span class="nav-number">4.</span> <span class="nav-text">接口与继承</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%86%99"><span class="nav-number">4.1.</span> <span class="nav-text">重写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E6%80%81"><span class="nav-number">4.2.</span> <span class="nav-text">多态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%90%E8%97%8F"><span class="nav-number">4.3.</span> <span class="nav-text">隐藏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#super%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">4.4.</span> <span class="nav-text">super关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object%E7%B1%BB"><span class="nav-number">4.5.</span> <span class="nav-text">Object类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#toString"><span class="nav-number">4.5.1.</span> <span class="nav-text">toString()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#finalize-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="nav-number">4.5.2.</span> <span class="nav-text">finalize()垃圾回收</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hashCode"><span class="nav-number">4.5.3.</span> <span class="nav-text">hashCode()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5"><span class="nav-number">4.5.4.</span> <span class="nav-text">线程同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getClass"><span class="nav-number">4.5.5.</span> <span class="nav-text">getClass()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB"><span class="nav-number">4.6.</span> <span class="nav-text">抽象类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">4.7.</span> <span class="nav-text">抽象类和接口的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E9%83%A8%E7%B1%BB"><span class="nav-number">4.8.</span> <span class="nav-text">内部类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E9%9D%99%E6%80%81%E5%86%85%E9%83%A8%E7%B1%BB"><span class="nav-number">4.8.1.</span> <span class="nav-text">非静态内部类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%86%85%E9%83%A8%E7%B1%BB"><span class="nav-number">4.8.2.</span> <span class="nav-text">静态内部类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BF%E5%90%8D%E7%B1%BB"><span class="nav-number">4.8.3.</span> <span class="nav-text">匿名类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E7%B1%BB"><span class="nav-number">4.8.4.</span> <span class="nav-text">本地类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E6%96%B9%E6%B3%95"><span class="nav-number">4.9.</span> <span class="nav-text">默认方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E4%B8%8E%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">5.</span> <span class="nav-text">数字与字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%81%E8%A3%85%E7%B1%BB"><span class="nav-number">5.1.</span> <span class="nav-text">封装类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Number%E7%B1%BB"><span class="nav-number">5.2.</span> <span class="nav-text">Number类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E8%A3%85%E7%AE%B1-%E6%8B%86%E7%AE%B1"><span class="nav-number">5.3.</span> <span class="nav-text">自动装箱&#x2F;拆箱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#int%E7%9A%84%E6%9C%80%E5%A4%A7%E5%80%BC%EF%BC%8C%E6%9C%80%E5%B0%8F%E5%80%BC"><span class="nav-number">5.4.</span> <span class="nav-text">int的最大值，最小值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#StringBuffer"><span class="nav-number">5.5.</span> <span class="nav-text">StringBuffer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A5%E6%9C%9F"><span class="nav-number">5.6.</span> <span class="nav-text">日期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A5%E6%9C%9F%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">5.6.1.</span> <span class="nav-text">日期转字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%97%A5%E6%9C%9F"><span class="nav-number">5.6.2.</span> <span class="nav-text">字符串转日期</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8"><span class="nav-number">6.</span> <span class="nav-text">异常</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%84%E7%90%86"><span class="nav-number">6.1.</span> <span class="nav-text">处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#try-catch"><span class="nav-number">6.1.1.</span> <span class="nav-text">try catch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E7%9A%84%E7%88%B6%E7%B1%BBcatch"><span class="nav-number">6.1.2.</span> <span class="nav-text">异常的父类catch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E5%BC%82%E5%B8%B8%E6%8D%95%E6%8D%89%E6%96%B9%E6%B3%95"><span class="nav-number">6.1.3.</span> <span class="nav-text">多异常捕捉方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#finally"><span class="nav-number">6.1.4.</span> <span class="nav-text">finally</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#throws"><span class="nav-number">6.1.5.</span> <span class="nav-text">throws</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#throw%E5%92%8Cthrows%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">6.1.6.</span> <span class="nav-text">throw和throws的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E5%88%86%E7%B1%BB"><span class="nav-number">6.2.</span> <span class="nav-text">异常分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E6%9F%A5%E5%BC%82%E5%B8%B8"><span class="nav-number">6.2.1.</span> <span class="nav-text">可查异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E5%BC%82%E5%B8%B8"><span class="nav-number">6.2.2.</span> <span class="nav-text">运行时异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF"><span class="nav-number">6.2.3.</span> <span class="nav-text">错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">6.2.4.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E5%BC%82%E5%B8%B8%E4%B8%8E%E9%9D%9E%E8%BF%90%E8%A1%8C%E6%97%B6%E5%BC%82%E5%B8%B8%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">6.3.</span> <span class="nav-text">运行时异常与非运行时异常的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Throwable"><span class="nav-number">6.3.1.</span> <span class="nav-text">Throwable</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B8"><span class="nav-number">6.4.</span> <span class="nav-text">创建自定义异常</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#I-O"><span class="nav-number">7.</span> <span class="nav-text">I&#x2F;O</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81"><span class="nav-number">7.1.</span> <span class="nav-text">流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AD%E6%96%87%E9%97%AE%E9%A2%98"><span class="nav-number">7.2.</span> <span class="nav-text">中文问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E6%B5%81"><span class="nav-number">7.3.</span> <span class="nav-text">缓存流</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BufferedReader"><span class="nav-number">7.3.1.</span> <span class="nav-text">BufferedReader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PrintWriter"><span class="nav-number">7.3.2.</span> <span class="nav-text">PrintWriter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flush"><span class="nav-number">7.3.3.</span> <span class="nav-text">flush</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%B5%81"><span class="nav-number">7.4.</span> <span class="nav-text">数据流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E6%B5%81"><span class="nav-number">7.5.</span> <span class="nav-text">对象流</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6"><span class="nav-number">8.</span> <span class="nav-text">集合框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList"><span class="nav-number">8.1.</span> <span class="nav-text">ArrayList</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">8.1.1.</span> <span class="nav-text">常用方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%9B%E5%9E%8B"><span class="nav-number">8.1.2.</span> <span class="nav-text">泛型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%8D%E5%8E%86"><span class="nav-number">8.1.3.</span> <span class="nav-text">遍历</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LinkedList"><span class="nav-number">8.2.</span> <span class="nav-text">LinkedList</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95-1"><span class="nav-number">8.2.1.</span> <span class="nav-text">常用方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap"><span class="nav-number">8.3.</span> <span class="nav-text">HashMap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashSet"><span class="nav-number">8.4.</span> <span class="nav-text">HashSet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashSet%E5%92%8CHashMap%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">8.5.</span> <span class="nav-text">HashSet和HashMap的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Collection"><span class="nav-number">8.6.</span> <span class="nav-text">Collection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Collections"><span class="nav-number">8.7.</span> <span class="nav-text">Collections</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList-vs-HashSet"><span class="nav-number">8.8.</span> <span class="nav-text">ArrayList vs HashSet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap-vs-HashTable"><span class="nav-number">8.9.</span> <span class="nav-text">HashMap vs HashTable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%A0%E7%A7%8DSet"><span class="nav-number">8.10.</span> <span class="nav-text">几种Set</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hashcode%E7%9A%84%E5%8E%9F%E7%90%86"><span class="nav-number">8.11.</span> <span class="nav-text">hashcode的原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E5%99%A8"><span class="nav-number">8.12.</span> <span class="nav-text">比较器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Comparator"><span class="nav-number">8.12.1.</span> <span class="nav-text">Comparator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Comparable"><span class="nav-number">8.12.2.</span> <span class="nav-text">Comparable</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%9B%E5%9E%8B-1"><span class="nav-number">9.</span> <span class="nav-text">泛型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E6%B3%9B%E5%9E%8B%E7%9A%84%E7%B1%BB"><span class="nav-number">9.1.</span> <span class="nav-text">支持泛型的类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E9%85%8D%E7%AC%A6"><span class="nav-number">9.2.</span> <span class="nav-text">通配符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#extends"><span class="nav-number">9.2.1.</span> <span class="nav-text">? extends</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#super"><span class="nav-number">9.2.2.</span> <span class="nav-text">? super</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%9B%E5%9E%8B%E9%80%9A%E9%85%8D%E7%AC%A6"><span class="nav-number">9.2.3.</span> <span class="nav-text">泛型通配符?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%9B%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">9.2.4.</span> <span class="nav-text">泛型转换</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">10.</span> <span class="nav-text">Lambda表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%81%9A%E5%90%88%E6%93%8D%E4%BD%9C"><span class="nav-number">10.1.</span> <span class="nav-text">聚合操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="nav-number">11.</span> <span class="nav-text">多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="nav-number">11.1.</span> <span class="nav-text">创建多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF%E7%BA%BF%E7%A8%8B%E7%B1%BB"><span class="nav-number">11.1.1.</span> <span class="nav-text">继承线程类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0Runnable%E6%8E%A5%E5%8F%A3"><span class="nav-number">11.1.2.</span> <span class="nav-text">实现Runnable接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BF%E5%90%8D%E7%B1%BB-1"><span class="nav-number">11.1.3.</span> <span class="nav-text">匿名类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%BA%BF%E7%A8%8B%E6%96%B9%E6%B3%95"><span class="nav-number">11.2.</span> <span class="nav-text">常见线程方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sleep"><span class="nav-number">11.2.1.</span> <span class="nav-text">sleep()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#join"><span class="nav-number">11.2.2.</span> <span class="nav-text">join()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#setPriority"><span class="nav-number">11.2.3.</span> <span class="nav-text">setPriority()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yield"><span class="nav-number">11.2.4.</span> <span class="nav-text">yield()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#setDaemon"><span class="nav-number">11.2.5.</span> <span class="nav-text">setDaemon()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5"><span class="nav-number">11.3.</span> <span class="nav-text">同步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E7%B1%BB"><span class="nav-number">11.4.</span> <span class="nav-text">线程安全的类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap-vs-HashTable-1"><span class="nav-number">11.4.1.</span> <span class="nav-text">HashMap vs HashTable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#StringBuffer-vs-StringBuilder"><span class="nav-number">11.4.2.</span> <span class="nav-text">StringBuffer vs StringBuilder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList-vs-Vector"><span class="nav-number">11.4.3.</span> <span class="nav-text">ArrayList vs Vector</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%8A%E9%9D%9E%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E9%9B%86%E5%90%88%E8%BD%AC%E6%8D%A2%E4%B8%BA%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8"><span class="nav-number">11.4.4.</span> <span class="nav-text">把非线程安全的集合转换为线程安全</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%BB%E9%94%81"><span class="nav-number">11.5.</span> <span class="nav-text">死锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A4%E4%BA%92"><span class="nav-number">11.6.</span> <span class="nav-text">交互</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0"><span class="nav-number">11.7.</span> <span class="nav-text">线程池</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lock%E5%AF%B9%E8%B1%A1"><span class="nav-number">11.8.</span> <span class="nav-text">Lock对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%AD%90%E8%AE%BF%E9%97%AE"><span class="nav-number">11.9.</span> <span class="nav-text">原子访问</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7%E5%92%8C%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="nav-number">12.</span> <span class="nav-text">工具和中间件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E8%AF%95"><span class="nav-number">12.1.</span> <span class="nav-text">调试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E5%BA%94%E7%94%A8Debug"><span class="nav-number">12.1.1.</span> <span class="nav-text">Java应用Debug</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
