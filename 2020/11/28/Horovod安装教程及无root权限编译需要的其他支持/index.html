@@ -1,0 +1,165 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Horovod安装教程及无root权限编译需要的其他支持 | ChenChenChen's Blog</title><meta name="description" content="安装Horovod前，必须安装的一些支持 Cmake  gcc g++（官方要求4.8.9，4.9，但是实测gcc5.4可行，gcc7.0+也可行）  OpenMPI4.0.0可行  NCCL 2 建议，在看任何教程前，前去官方教程去看一看，笔者就是看了一大圈第三方教程后，去官网看了一眼，发现自己想要的东西就在那，而且很快就解决了问题。 官方教程： https:&#x2F;&#x2F;github.com&#x2F;horov"><meta name="author" content="Chen Jiahui"><meta name="copyright" content="Chen Jiahui"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://yoursite.com/2020/11/28/Horovod%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B%E5%8F%8A%E6%97%A0root%E6%9D%83%E9%99%90%E7%BC%96%E8%AF%91%E9%9C%80%E8%A6%81%E7%9A%84%E5%85%B6%E4%BB%96%E6%94%AF%E6%8C%81/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="article"><meta property="og:title" content="Horovod安装教程及无root权限编译需要的其他支持"><meta property="og:url" content="http://yoursite.com/2020/11/28/Horovod%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B%E5%8F%8A%E6%97%A0root%E6%9D%83%E9%99%90%E7%BC%96%E8%AF%91%E9%9C%80%E8%A6%81%E7%9A%84%E5%85%B6%E4%BB%96%E6%94%AF%E6%8C%81/"><meta property="og:site_name" content="ChenChenChen's Blog"><meta property="og:description" content="安装Horovod前，必须安装的一些支持 Cmake  gcc g++（官方要求4.8.9，4.9，但是实测gcc5.4可行，gcc7.0+也可行）  OpenMPI4.0.0可行  NCCL 2 建议，在看任何教程前，前去官方教程去看一看，笔者就是看了一大圈第三方教程后，去官网看了一眼，发现自己想要的东西就在那，而且很快就解决了问题。 官方教程： https:&#x2F;&#x2F;github.com&#x2F;horov"><meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><meta property="article:published_time" content="2020-11-27T16:44:09.000Z"><meta property="article:modified_time" content="2020-11-27T16:45:40.056Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '5.0.0',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: false,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2020-11-28 00:45:40'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img {
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 5.0.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" data-lazy-src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">10</div></a></div></div></div><hr/></div></div><div id="body-wrap"><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Horovod%E5%89%8D%EF%BC%8C%E5%BF%85%E9%A1%BB%E5%AE%89%E8%A3%85%E7%9A%84%E4%B8%80%E4%BA%9B%E6%94%AF%E6%8C%81"><span class="toc-number">1.</span> <span class="toc-text">安装Horovod前，必须安装的一些支持</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9B%B4%E6%8D%A2gcc%E7%89%88%E6%9C%AC%E6%95%99%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">更换gcc版本教程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85OpenMPI"><span class="toc-number">3.</span> <span class="toc-text">安装OpenMPI</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85NCCL-2"><span class="toc-number">4.</span> <span class="toc-text">安装NCCL 2</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%951"><span class="toc-number">4.1.</span> <span class="toc-text">方法1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%952"><span class="toc-number">4.2.</span> <span class="toc-text">方法2</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Horovod"><span class="toc-number">5.</span> <span class="toc-text">安装Horovod</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">6.</span> <span class="toc-text">参考资料</span></a></li></ol></div></div></div><header class="post-bg" id="page-header" style="background-image: url(https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">ChenChenChen's Blog</a></span><span class="pull-right menus"><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">Horovod安装教程及无root权限编译需要的其他支持</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-11-27T16:44:09.000Z" title="发表于 2020-11-28 00:44:09">2020-11-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-11-27T16:45:40.056Z" title="更新于 2020-11-28 00:45:40">2020-11-28</time></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="安装Horovod前，必须安装的一些支持"><a href="#安装Horovod前，必须安装的一些支持" class="headerlink" title="安装Horovod前，必须安装的一些支持"></a>安装Horovod前，必须安装的一些支持</h1><ul>
+<li><p>Cmake</p>
+</li>
+<li><p>gcc g++（官方要求4.8.9，4.9，但是实测gcc5.4可行，gcc7.0+也可行）</p>
+</li>
+<li><p>OpenMPI4.0.0可行</p>
+</li>
+<li><p>NCCL 2</p>
+<p>建议，在看任何教程前，前去官方教程去看一看，笔者就是看了一大圈第三方教程后，去官网看了一眼，发现自己想要的东西就在那，而且很快就解决了问题。</p>
+<p>官方教程：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/horovod/horovod/blob/master/docs/install.rst">https://github.com/horovod/horovod/blob/master/docs/install.rst</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/horovod/horovod/blob/master/docs/gpus.rst">https://github.com/horovod/horovod/blob/master/docs/gpus.rst</a></p>
+<p>且笔者在服务器上配置，无root权限，所以很多东西需要自己下载源码编译，不能直接sudo apt-，如果有root权限安装起来更方便。不过也可以用源码编译，更能深刻理解Linux为什么要分多用户，及root权限。</p>
+</li>
+</ul>
+<h1 id="更换gcc版本教程"><a href="#更换gcc版本教程" class="headerlink" title="更换gcc版本教程"></a>更换gcc版本教程</h1><p>参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/yaoyutian/article/details/90761619">https://blog.csdn.net/yaoyutian/article/details/90761619</a></p>
+<p>其中有几点很重要，gcc其他要依赖gmp、mpfr、mpc、isl，在安装gcc前要安装这几个版本，但是不要自己随便选择版本安装，gcc文件里都给你写好了，直接执行./contrib/download_prerequisites就可以自己帮你down这几个源码包并解压，到make编译时候直接顺便把这些给编译了。<br>如果成功，终端输入<code>gcc --version</code> 会输出相应版本号。</p>
+<h1 id="安装OpenMPI"><a href="#安装OpenMPI" class="headerlink" title="安装OpenMPI"></a>安装OpenMPI</h1><p>prefix写自己用户下的文件，最好建立一个app/software文件夹，方便不使用root安装自己的软件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-4.0.0.tar.gz</span><br><span class="line">tar -xzvf openmpi-4.0.0.tar.gz</span><br><span class="line">cd openmpi-4.0.0</span><br><span class="line">./configure --prefix=$HOME/app/openmpi-4.0.0 --with-cuda-10.1</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">在bashrc下加入环境变量</span></span><br><span class="line">vi ~/.bashrc</span><br><span class="line"><span class="meta">#</span><span class="bash">openmpi</span></span><br><span class="line">export PATH=/home/chenjiahui/app/openmpi-4.0.0/bin:$PATH</span><br><span class="line">export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/chenjiahui/app/openmpi-4.0.0/lib</span><br><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="安装NCCL-2"><a href="#安装NCCL-2" class="headerlink" title="安装NCCL 2"></a>安装NCCL 2</h1><h2 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h2><p>该方法适用于有root权限的同学，可以快速安装。无root权限需要编译安装，直接看方法2。</p>
+<p>先下载库文件 <a target="_blank" rel="noopener" href="https://developer.nvidia.com/nccl/nccl-legacy-downloads">https://developer.nvidia.com/nccl/nccl-legacy-downloads</a></p>
+<p>提示：需要对应自己的cuda版本。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> option 1: <span class="built_in">local</span></span></span><br><span class="line">sudo dpkg -i nccl-repo-ubuntu1804-2.4.8-ga-cuda10.0_1-1_amd64</span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span><span class="bash"> option 2: network</span></span><br><span class="line">sudo dpkg -i nvidia-machine-learning-repo-ubuntu1804_1.0.0-1_amd64.deb</span><br><span class="line"> </span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt install libnccl2=2.4.8-1+cuda10.0 libnccl-dev=2.4.8-1+cuda10.0</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h2><p>首先，从github上将NCCL的仓库拉到本地：(如果没有git指令 ps:我这台服务器上还真没有- -！，在win上down下来zip，然后传到服务器unzip，切记不可在win上解压再上传，会出现permission deny，因为win解压出来的文件跟linux不一样，有时候需要更改set ff=unix，或者chmod 777 filename给更高的权限)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/NVIDIA/nccl.git</span><br></pre></td></tr></table></figure>
+
+<p>编译nccl(后面的NVCC_GENCODE可以不指定，就是编译慢一点，一般服务器比较快，可以直接-j用更多的核)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd nccl</span><br><span class="line">make -j12 src.build BUILDDIR=/home/chenjiahui/app/nccl CUDA_HOME=/home/chenjiahui/cuda-10.1 NVCC_GENCODE=&quot;-gencode=arch=compute_35,code=sm_35&quot;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>-j12</code>表示使用<code>12</code>个核心，使用<code>nproc</code>查看总核心数，根据具体情况进行调整；</li>
+<li><strong><code>BUILDDIR</code>表示编译后，一些文件的存储路径；默认是<code>nccl/build</code>；当然如果是root用户可以指定到<code>/usr/local/ncc/</code>；</strong></li>
+<li><code>CUDA_HOME</code>表示CUDA的目录，默认就是<code>/usr/local/cuda</code>，可以指定自己的cuda版本；</li>
+<li><code>NVCC_GENCODE</code>，如果不添加该字段，默认会编译支持所有架构；为了加速编译以及降低二进制文件大小，添加该字段，具体<code>comute_35,sm_35</code>是<strong>应该</strong>是和显卡算力相匹配，具体见：<a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-gpus">CUDA GPUs</a></li>
+</ul>
+<p>最后呢，编译完成的文件都在指定的<code>NVCC_GENCODE</code>字段路径下，需要将其添加到环境变量；</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bashrc</span><br><span class="line"><span class="meta">#</span><span class="bash">在.bashrc中添加</span></span><br><span class="line">export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/chenz/software/nccl/lib</span><br><span class="line">export PATH=$PATH:/home/chenz/software/nccl/bin</span><br><span class="line"><span class="meta">#</span><span class="bash">保存后，执行：</span></span><br><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<p>在NCCL的git上有教怎么test是否安装成功，这里就不教了，可以自己试一下，后来发现添加完环境变量还是不行，需要在安装Horovod的时候指定nccl所在的位置。</p>
+<h1 id="安装Horovod"><a href="#安装Horovod" class="headerlink" title="安装Horovod"></a>安装Horovod</h1><p>安装Horovod前保证自己的tensorflow已经安装好，还是那句话，先看官方教程!先看官方教程!先看官方教程!</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/horovod/horovod/blob/master/docs/install.rst">https://github.com/horovod/horovod/blob/master/docs/install.rst</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/horovod/horovod/blob/master/docs/gpus.rst">https://github.com/horovod/horovod/blob/master/docs/gpus.rst</a></p>
+<p>根据官网文档，其实只需要把nccl的lib加入到环境变量就可以了，其实nccl下也没有bin文件。</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2020/11/28/Horovod%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B%E5%8F%8A%E6%97%A0root%E6%9D%83%E9%99%90%E7%BC%96%E8%AF%91%E9%9C%80%E8%A6%81%E7%9A%84%E5%85%B6%E4%BB%96%E6%94%AF%E6%8C%81/image-20201123171251848.png" alt="image-20201123171251848"></p>
+<p>看看官方说的有多清楚，其实我就应该使用指定nccl文件位置的方法来安装即：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> HOROVOD_NCCL_HOME=/usr/<span class="built_in">local</span>/nccl-&lt;version&gt; HOROVOD_GPU_OPERATIONS=NCCL pip install --no-cache-dir horovod</span></span><br></pre></td></tr></table></figure>
+
+<p>如果报错：RuntimeError: CMake failed: [Errno 2] No such file or directory: ‘cmake’: ‘cmake’<br>使用<code>pip install cmake</code></p>
+<p>如果你使用的root权限，用package安装的，环境变量什么的都已经给你配置好了，直接使用以下指令安装：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> HOROVOD_GPU_OPERATIONS=NCCL pip install --no-cache-dir horovod</span></span><br></pre></td></tr></table></figure>
+
+<p>如果在horovod的build过程中没有出现错误，那证明安装成功啦。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="%5Bhttps://blog.csdn.net/qianshuqinghan/article/details/105312784#6).%20%E9%AA%8C%E8%AF%81%E7%89%88%E6%9C%AC%5D(https://blog.csdn.net/qianshuqinghan/article/details/105312784#6">ubuntu 18.04 Horovod的安装和使用</a>. 验证版本)</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/w5688414/article/details/107063150">ubuntu 18.04安装horovod</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/NVIDIA/nccl">nccl</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chenzhen0530/p/13885258.html">Linux下NCCL源码编译安装</a></p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Chen Jiahui</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yoursite.com/2020/11/28/Horovod%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B%E5%8F%8A%E6%97%A0root%E6%9D%83%E9%99%90%E7%BC%96%E8%AF%91%E9%9C%80%E8%A6%81%E7%9A%84%E5%85%B6%E4%BB%96%E6%94%AF%E6%8C%81/">http://yoursite.com/2020/11/28/Horovod%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B%E5%8F%8A%E6%97%A0root%E6%9D%83%E9%99%90%E7%BC%96%E8%AF%91%E9%9C%80%E8%A6%81%E7%9A%84%E5%85%B6%E4%BB%96%E6%94%AF%E6%8C%81/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yoursite.com" target="_blank">ChenChenChen's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/11/28/%E6%9C%AC%E5%9C%B0%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E6%9C%8D%E5%8A%A1%E5%99%A8tensorboard-%E4%BD%BF%E7%94%A8MobaXterm/"><img class="prev-cover" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">本地浏览器远程访问服务器tensorboard--使用MobaXterm</div></div></a></div><div class="next-post pull-right"><a href="/2020/08/25/%E8%AE%A1%E7%AE%97%E6%B5%81%E4%BD%93%E5%8A%9B%E5%AD%A62020-%E6%9D%8E%E6%96%B0%E4%BA%AE-%E4%B8%AD%E5%9B%BD%E7%A7%91%E5%AD%A6%E9%99%A2%E5%A4%A7%E5%AD%A6/"><img class="next-cover" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">计算流体力学2020_李新亮_中国科学院大学</div></div></a></div></nav></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 By Chen Jiahui</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></div></body></html>
