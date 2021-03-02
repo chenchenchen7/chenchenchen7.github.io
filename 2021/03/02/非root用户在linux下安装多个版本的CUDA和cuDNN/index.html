@@ -1,0 +1,142 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>非root用户在linux下安装多个版本的CUDA和cuDNN | ChenChenChen's Blog</title><meta name="description" content="普通用户不使用sudo安装多个版本CUDA和cuDNN 注：本文中服务器目录结构解释如下：用户名为chenjiahui，目录 &#x2F;home&#x2F;chenjiahui&#x2F;cuda&#x2F;用于存放不同的cuda版本,每安装一个版本的CUDA就在该目录下新建一个文件夹，如cuda-8.0，并安装在相应的目录下，安装包下载到 &#x2F;home&#x2F;chenjiahui&#x2F;cuda&#x2F; 目录下，安装完成后就删除安装包，目录 &#x2F;home"><meta name="author" content="Chen Jiahui"><meta name="copyright" content="Chen Jiahui"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://yoursite.com/2021/03/02/%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E5%9C%A8linux%E4%B8%8B%E5%AE%89%E8%A3%85%E5%A4%9A%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84CUDA%E5%92%8CcuDNN/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="article"><meta property="og:title" content="非root用户在linux下安装多个版本的CUDA和cuDNN"><meta property="og:url" content="http://yoursite.com/2021/03/02/%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E5%9C%A8linux%E4%B8%8B%E5%AE%89%E8%A3%85%E5%A4%9A%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84CUDA%E5%92%8CcuDNN/"><meta property="og:site_name" content="ChenChenChen's Blog"><meta property="og:description" content="普通用户不使用sudo安装多个版本CUDA和cuDNN 注：本文中服务器目录结构解释如下：用户名为chenjiahui，目录 &#x2F;home&#x2F;chenjiahui&#x2F;cuda&#x2F;用于存放不同的cuda版本,每安装一个版本的CUDA就在该目录下新建一个文件夹，如cuda-8.0，并安装在相应的目录下，安装包下载到 &#x2F;home&#x2F;chenjiahui&#x2F;cuda&#x2F; 目录下，安装完成后就删除安装包，目录 &#x2F;home"><meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><meta property="article:published_time" content="2021-03-02T15:57:53.000Z"><meta property="article:modified_time" content="2021-03-02T15:58:07.454Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '5.0.0',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: false,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2021-03-02 23:58:07'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img {
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 5.0.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" data-lazy-src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">14</div></a></div></div></div><hr/></div></div><div id="body-wrap"><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A1%AE%E5%AE%9A%E5%AE%89%E8%A3%85%E7%9A%84%E8%BD%AF%E4%BB%B6%E7%89%88%E6%9C%AC"><span class="toc-number">1.</span> <span class="toc-text">确定安装的软件版本</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDCUDA-Toolkit"><span class="toc-number">2.</span> <span class="toc-text">下载CUDA Toolkit</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDcuDNN"><span class="toc-number">3.</span> <span class="toc-text">下载cuDNN</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85CUDA"><span class="toc-number">4.</span> <span class="toc-text">安装CUDA</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEcuDNN"><span class="toc-number">5.</span> <span class="toc-text">配置cuDNN</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%94%A8%E6%88%B7%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-number">6.</span> <span class="toc-text">配置用户环境变量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%A4%9A%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84CUDA"><span class="toc-number">7.</span> <span class="toc-text">安装多个版本的CUDA</span></a></li></ol></div></div></div><header class="post-bg" id="page-header" style="background-image: url(https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">ChenChenChen's Blog</a></span><span class="pull-right menus"><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">非root用户在linux下安装多个版本的CUDA和cuDNN</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-03-02T15:57:53.000Z" title="发表于 2021-03-02 23:57:53">2021-03-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-03-02T15:58:07.454Z" title="更新于 2021-03-02 23:58:07">2021-03-02</time></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><p>普通用户不使用sudo安装多个版本CUDA和cuDNN</p>
+<p>注：本文中服务器目录结构解释如下：<br>用户名为chenjiahui，<br>目录 /home/chenjiahui/cuda/用于存放不同的cuda版本,每安装一个版本的CUDA就在该目录下新建一个文件夹，如cuda-8.0，并安装在相应的目录下，<br>安装包下载到 /home/chenjiahui/cuda/ 目录下，安装完成后就删除安装包，<br>目录 /home/chenjiahui/cuda/tem/ 目录用于cuDNN的解压，安装完成后就删除该目录。</p>
+<h1 id="确定安装的软件版本"><a href="#确定安装的软件版本" class="headerlink" title="确定安装的软件版本"></a>确定安装的软件版本</h1><p>安装前需先确定显卡驱动、CUDA、cuDNN等之间的对应关系。由于我的帐户没有管理员权限，不能安装显卡驱动，只能根据现有驱动的版本来选择CUDA版本，输入指令<code>cat /proc/driver/nvidia/version</code> 查看当前服务器版本号(我已经装了高版本驱动)：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/02/%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E5%9C%A8linux%E4%B8%8B%E5%AE%89%E8%A3%85%E5%A4%9A%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84CUDA%E5%92%8CcuDNN/image-20201128110306518.png" alt="image-20201128110306518"></p>
+<p>不同版本cuda对应的NVIDIA驱动版本：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/02/%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E5%9C%A8linux%E4%B8%8B%E5%AE%89%E8%A3%85%E5%A4%9A%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84CUDA%E5%92%8CcuDNN/20191128222010982.png" alt="在这里插入图片描述"></p>
+<h1 id="下载CUDA-Toolkit"><a href="#下载CUDA-Toolkit" class="headerlink" title="下载CUDA Toolkit"></a>下载CUDA Toolkit</h1><p>cuda的下载地址: <a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-toolkit-archive">https://developer.nvidia.com/cuda-toolkit-archive</a></p>
+<p>使用wget，或者在win上下载好后传到服务器上</p>
+<h1 id="下载cuDNN"><a href="#下载cuDNN" class="headerlink" title="下载cuDNN"></a>下载cuDNN</h1><p>cuDNN的下载: <a target="_blank" rel="noopener" href="https://developer.nvidia.com/rdp/cudnn-archive">https://developer.nvidia.com/rdp/cudnn-archive</a><br>随便选择一个与CUDA 8.0对应的版本</p>
+<p>选择以.tgz为后缀的Linux包，这里选择第一个：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/02/%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E5%9C%A8linux%E4%B8%8B%E5%AE%89%E8%A3%85%E5%A4%9A%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84CUDA%E5%92%8CcuDNN/20190317151428537.png" alt="在这里插入图片描述"></p>
+<p>同样，将包下载到服务器备用。<br>注：由于下载cuDNN需要登录帐户，直接在终端用指令下载可能会失败，可以先在windows上注册个帐户下载好再上传到服务器（使用MobaXterm等软件连接服务器后可以很方便地把windows上的文件通过拖动的方式上传到服务器上）。</p>
+<h1 id="安装CUDA"><a href="#安装CUDA" class="headerlink" title="安装CUDA"></a>安装CUDA</h1><p>在安装包所在目录下输入指令sh XXX进行安装，XXX为CUDA安装包文件名，如：<code>sh cuda_10.1_linux-run</code></p>
+<p>cuda 10.1：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/02/%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E5%9C%A8linux%E4%B8%8B%E5%AE%89%E8%A3%85%E5%A4%9A%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84CUDA%E5%92%8CcuDNN/20191225210237372.png" alt="在这里插入图片描述"></p>
+<p>按空格根据需要选择要安装的模块，有“X”的表示安装，没有的表示不安装，我这里已经安装过418.116的显卡驱动了，所以选择不安装驱动：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/02/%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E5%9C%A8linux%E4%B8%8B%E5%AE%89%E8%A3%85%E5%A4%9A%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84CUDA%E5%92%8CcuDNN/20191225205428868.png" alt="在这里插入图片描述"></p>
+<p>按上下键移动到CUDA Toolkit 10.1上，然后按“A”键，出现：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/02/%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E5%9C%A8linux%E4%B8%8B%E5%AE%89%E8%A3%85%E5%A4%9A%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84CUDA%E5%92%8CcuDNN/20191225212202767.png" alt="在这里插入图片描述"></p>
+<p>全部不安装并更改Toolkit Install Path：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/02/%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E5%9C%A8linux%E4%B8%8B%E5%AE%89%E8%A3%85%E5%A4%9A%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84CUDA%E5%92%8CcuDNN/20191225211930108.png" alt="在这里插入图片描述"></p>
+<p>再返回主界面然后选择Options-&gt;Library install path：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/02/%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E5%9C%A8linux%E4%B8%8B%E5%AE%89%E8%A3%85%E5%A4%9A%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84CUDA%E5%92%8CcuDNN/20191225205851223.png" alt="在这里插入图片描述"></p>
+<p><img src= "/img/loading.gif" data-lazy-src="/2021/03/02/%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E5%9C%A8linux%E4%B8%8B%E5%AE%89%E8%A3%85%E5%A4%9A%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84CUDA%E5%92%8CcuDNN/20191225205957872.png" alt="在这里插入图片描述"></p>
+<p>然后确定，返回选择Install</p>
+<p>注：若出现 Error: unsupported compiler: X.X.X，一般是gcc版本和CUDA没对应，可尝试指令sh cuda_8.0.61_375.26_linux-run –override，如果没解决，则需要安装相对应的gcc。</p>
+<h1 id="配置cuDNN"><a href="#配置cuDNN" class="headerlink" title="配置cuDNN"></a>配置cuDNN</h1><p>使用指令tar -xzvf /home/zb/cuda/cudnn-8.0-linux-x64-v7.1.tgz -C /home/zb/cuda/tem/ 将cuDNN解压到tem文件夹并执行以下指令:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp /home/zb/cuda/tem/cuda/include/cudnn.h  /home/zb/cuda/cuda-8.0/include/  </span><br><span class="line">cp /home/zb/cuda/tem/cuda/lib64/libcudnn*  /home/zb/cuda/cuda-8.0/lib64</span><br><span class="line">chmod a+r /home/zb/cuda/cuda-8.0/include/cudnn.h  /home/zb/cuda/cuda-8.0/lib64/libcudnn*</span><br></pre></td></tr></table></figure>
+
+<h1 id="配置用户环境变量"><a href="#配置用户环境变量" class="headerlink" title="配置用户环境变量"></a>配置用户环境变量</h1><p>修改个人用户目录下的.bashrc文件(用vi ~/.bashrc编辑）,在文件最后面加入以下指令并保存</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export PATH=/home/zb/cuda/cuda-8.0/bin$&#123;PATH:+:$&#123;PATH&#125;&#125;</span><br><span class="line">export LD_LIBRARY_PATH=/home/zb/cuda/cuda-8.0/lib64$&#123;LD_LIBRARY_PATH:+:$&#123;LD_LIBRARY_PATH&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后输入指令<code>source ~/.bashrc</code> 使新配置的环境变量生效</p>
+<h1 id="安装多个版本的CUDA"><a href="#安装多个版本的CUDA" class="headerlink" title="安装多个版本的CUDA"></a>安装多个版本的CUDA</h1><p>如果要安装多个共存的CUDA版本则重复上面的步骤，挑选相对应且系统支持的CUDA、cuDNN进行类似的安装，切换环境时直接在.bashrc文件里更改之前配置环境时加入的路径代码即可。如将CUDA 8.0切换成CUDA 9.0则将.bashrc中的</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export PATH=/home/zb/cuda/cuda-8.0/bin$&#123;PATH:+:$&#123;PATH&#125;&#125;</span><br><span class="line">export LD_LIBRARY_PATH=/home/zb/cuda/cuda-8.0/lib64$&#123;LD_LIBRARY_PATH:+:$&#123;LD_LIBRARY_PATH&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>改为</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export PATH=/home/zb/cuda/cuda-9.0/bin$&#123;PATH:+:$&#123;PATH&#125;&#125;</span><br><span class="line">export LD_LIBRARY_PATH=/home/zb/cuda/cuda-9.0/lib64$&#123;LD_LIBRARY_PATH:+:$&#123;LD_LIBRARY_PATH&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>并执行指令指令source .bashrc 即可，</p>
+<p>输入nvcc -V ：查看是否安装成功，以及现在的版本。<br>输入which nvcc ：查看nvcc位置</p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Chen Jiahui</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yoursite.com/2021/03/02/%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E5%9C%A8linux%E4%B8%8B%E5%AE%89%E8%A3%85%E5%A4%9A%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84CUDA%E5%92%8CcuDNN/">http://yoursite.com/2021/03/02/%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E5%9C%A8linux%E4%B8%8B%E5%AE%89%E8%A3%85%E5%A4%9A%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84CUDA%E5%92%8CcuDNN/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yoursite.com" target="_blank">ChenChenChen's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/03/03/%E5%8D%87%E7%BA%A7%E6%9C%8D%E5%8A%A1%E5%99%A8Ubuntu-Linux%E7%9A%84Nvidia-Driver/"><img class="prev-cover" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">升级服务器Ubuntu Linux的Nvidia Driver</div></div></a></div><div class="next-post pull-right"><a href="/2021/03/02/MAVEN%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AETomcat%E6%8F%90%E7%A4%BAjavax-servlet-http%E4%B8%8D%E5%AD%98%E5%9C%A8-1/"><img class="next-cover" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">MAVEN项目配置Tomcat提示javax.servlet.http不存在</div></div></a></div></nav></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Chen Jiahui</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></div></body></html>
